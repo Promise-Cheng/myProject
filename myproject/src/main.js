@@ -4,12 +4,17 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+import {Button,NavBar} from "vant";
+import 'vant/lib/index.css'
+
+Vue.use(Button)
+Vue.use(NavBar)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
-  components: { App },
+  components: {App},
   template: '<App/>'
 })
