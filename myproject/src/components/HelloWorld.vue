@@ -1,19 +1,24 @@
 <template>
-  <div class="login">
-    <login-header></login-header>
+  <div class="login" :style="{height:height}">
+    <login-header />
+    <login-request />
+    <login-footer />
   </div>
 </template>
 
 <script>
   import * as api from '@/api/api'
   import LoginHeader from "@/views/login/login-header";
+  import LoginRequest from "@/views/login/login-request";
+  import LoginFooter from "@/views/login/login-footer";
 
   export default {
     name: 'HelloWorld',
-    components: {LoginHeader},
+    components: {LoginHeader, LoginRequest, LoginFooter},
     data() {
       return {
-        msg: 'Welcome to Your Vue.js App'
+        msg: 'Welcome to Your Vue.js App',
+        height: window.innerHeight + 'px',
       }
     },
     methods: {
