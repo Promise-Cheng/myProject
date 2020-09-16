@@ -2,7 +2,7 @@
 	<div class="login" :style="{height:height}">
 		<login-header />
 		<login-request />
-		<login-footer />
+		<login-footer :footer-tips="'Copyright@2020 浙江理工大学Team ALL rights reserved'" />
 	</div>
 </template>
 
