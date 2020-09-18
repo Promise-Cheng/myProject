@@ -6,9 +6,11 @@ import router from './router/index'
 import lodash from 'lodash'
 
 
-import { Icon, Cell, CellGroup, Button, Toast,NavBar} from "vant";
+import {Tag,Icon, Cell, CellGroup, Button, Toast, NavBar, Card} from "vant";
 import 'vant/lib/index.css'
 
+Vue.use(Tag)
+Vue.use(Card)
 Vue.use(Icon)
 Vue.use(Cell)
 Vue.use(CellGroup)
