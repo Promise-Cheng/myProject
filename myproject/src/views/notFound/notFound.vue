@@ -31,6 +31,6 @@
 
 <style lang="scss" scoped>
   .background {
-    background-color: $gray;
+    background-color: #fff;
   }
 </style>

@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router/index'
 import lodash from 'lodash'
-
+import store from './store'
 
 import {List, Tag, Icon, Cell, CellGroup, Button, Toast, NavBar, Card} from "vant";
 import 'vant/lib/index.css'
@@ -26,5 +26,6 @@ new Vue({
   el: '#app',
   router,
   components: {App},
-  template: '<App/>'
+  template: '<App/>',
+  store,
 })

@@ -88,20 +88,20 @@
           return ;
         }
         api.common.login({stuNum:this.userName,password:this.password}).then((res)=>{
-          if(res.data.result==='success'){
+          if(res.result==='success'){
             this.isLogining = false;
-            sessionStorage.setItem('ms_username',res.data.info);
-            this.$store.state.user={user:this.stuId,info:res.data.info,password:this.password}
+            sessionStorage.setItem('ms_username',res.info);
+            console.log(this.$store.state.user)
+            this.$store.state.user={user:this.stuId,info:res.info,password:this.password}
             Toast.success('登录成功');
-            this.$router.push('/home')
+            this.$router.push('/home');
           }
           else{
             this.isLogining = false;
             Toast.fail('用户名或密码错误');
-            // this.$message.error('用户名或密码错误');
           }
         }).catch((err)=>{
-          Toast.fail('网络错误！');
+          Toast.fail(err);
           this.isLogining = false;
         })
       },
