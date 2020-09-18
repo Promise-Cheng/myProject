@@ -83,79 +83,32 @@
       checkField() {
         return !this.isNullOrEmptyStr(this.userName) || !this.isNullOrEmptyStr(this.userName)
       },
-      async validate() {
-        const result = await this.$validator.validate();
-        if (!result) {
-          const errMsg = this.errors.items[0].msg;
-          Toast(errMsg);
-          throw new Error(`表单验证: ${errMsg}`);
-        }
-      },
 
-      async login() {
-        const loginData = this.getLoginData();
-        const {data} = await this.$reqGet(USER_LOGIN, loginData);
-        setLocalStorage({
-          Authorization: data.data.access_token
-        });
-      },
-
-      async loginSubmit() {
+      loginSubmit() {
         this.isLogining = true;
         if(!this.checkField()){
           Toast('用户名或密码不能为空');
           this.isLogining = false;
           return ;
         }
-        api.apiAddress.login({userName:this.userName,password:this.password}).then((res)=>{
-          this.isLogining = false;
+        api.common.login({stuNum:this.userName,password:this.password}).then((res)=>{
+          if(res.data.result==='success'){
+            this.isLogining = false;
+            sessionStorage.setItem('ms_username',res.data.info);
+            this.$store.state.user={user:this.stuId,info:res.data.info,password:this.password}
+            Toast.success('登录成功');
+            this.$router.push('/home')
+          }
+          else{
+            this.isLogining = false;
+            Toast.fail('用户名或密码错误');
+            // this.$message.error('用户名或密码错误');
+          }
         }).catch((err)=>{
-          console.log(err)
-          Toast(err);
+          Toast.fail('网络错误！');
           this.isLogining = false;
         })
       },
-
-      async getUserProfile() {
-        const {
-          data: {data}
-        } = await this.$reqGet(USER_PROFILE);
-
-        setLocalStorage({
-          avatar: data.avatar,
-          user_id: data.user_id,
-          background_image: data.background_image,
-          nick_name: data.nick_name
-        });
-
-        this.routerRedirect();
-      },
-
-      routerRedirect() {
-        const {query} = this.$route;
-        this.$router.replace({
-          name: query.redirect || 'home',
-          query: query
-        });
-      },
-
-      getLoginData() {
-        const password = this.password;
-        const account = this.getUserType(this.account);
-        return {
-          [account]: this.account,
-          password
-        };
-      },
-
-      getUserType(account) {
-        const accountType = mobileReg.test(account)
-          ? 'mobile'
-          : emailReg.test(account)
-            ? 'email'
-            : 'username';
-        return accountType;
-      }
     },
   };
 </script>

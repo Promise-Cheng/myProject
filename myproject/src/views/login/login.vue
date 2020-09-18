@@ -24,8 +24,4 @@ export default {
 
 
 <style lang="scss" scoped>
-.login {
-  position: relative;
-  background-color: #fff;
-}
 </style>

@@ -3,6 +3,8 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import lodash from 'lodash'
+
 
 import { Icon, Cell, CellGroup, Button, Toast,NavBar} from "vant";
 import 'vant/lib/index.css'
@@ -13,6 +15,7 @@ Vue.use(CellGroup)
 Vue.use(Toast)
 Vue.use(Button)
 Vue.use(NavBar)
+Vue.use(lodash)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
