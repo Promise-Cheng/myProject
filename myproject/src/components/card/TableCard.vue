@@ -4,6 +4,7 @@
       :desc="desc"
       :title="title"
       :thumb="thumb"
+      @click-thumb="onClickThumb"
     >
       <template #tags>
         <van-tag plain :type="tagType">{{ statusName }}</van-tag>
@@ -13,10 +14,10 @@
           <div>结束时间:{{ endTime }}</div>
         </div>
       </template>
-<!--      <template #footer>-->
-<!--        <van-button size="mini">按钮</van-button>-->
-<!--        <van-button size="mini">按钮</van-button>-->
-<!--      </template>-->
+      <!--      <template #footer>-->
+      <!--        <van-button size="mini">按钮</van-button>-->
+      <!--        <van-button size="mini">按钮</van-button>-->
+      <!--      </template>-->
     </van-card>
   </div>
 </template>
@@ -25,7 +26,7 @@
   export default {
     name: "TableCard",
     props: {
-      title: {
+      title: {      //竞赛名称
         type: String,
         default: '竞赛名称',
       },
@@ -82,7 +83,10 @@
           default:
             return '竞赛状态';
         }
-      }
+      },
+      onClickThumb(){
+        this.$emit('click-thumb');
+      },
     }
   }
 </script>
