@@ -81,7 +81,7 @@
         this.userName = '';
       },
       checkField() {
-        return !this.isNullOrEmptyStr(this.userName) || !this.isNullOrEmptyStr(this.userName)
+        return !this.isNullOrEmptyStr(this.userName) || !this.isNullOrEmptyStr(this.password)
       },
 
       loginSubmit() {

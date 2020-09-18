@@ -1,6 +1,8 @@
-import _ from 'lodash'
+import _ from 'lodash';
+import {Toast} from "vant";
+
 export default {
-  methods:{
+  methods: {
     isIllegal(param) {
       return _.isUndefined(param) || _.isNull(param);
     },
@@ -10,6 +12,16 @@ export default {
     },
     isNullOrEmptyStr(params) {
       return this.isIllegal(params) || this.isEmptyStr(params)
+    },
+    checkField(data, checkData) {
+      let keyArr = Object.keys(checkData);
+      for (let key in keyArr) {
+        if (this.isNullOrEmptyStr(data[key])) {
+          Toast.fail(`${checkData[key]}不能为空！`);
+          return false;
+        }
+      }
+      return true;
     },
   },
 }
