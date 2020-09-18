@@ -51,10 +51,6 @@
   import md_kefu from '@/components/md-kefu/';
   import BaseMixin from '@/mixin/baseMixin'
   import * as api from '@/api/api'
-  // import {USER_LOGIN, USER_PROFILE} from '@/api/user';
-  // import {setLocalStorage} from 'core/utils/local-storage';
-  // import {emailReg, mobileReg} from '@/core/regexp';
-
   import {Popup, Toast} from 'vant';
 
   export default {

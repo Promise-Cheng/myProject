@@ -6,6 +6,7 @@
         v-model="fieldData.userName"
         icon="manager-o"
         placeholder="请输入学号"
+        type="digit"
         right-icon="clear"
         @right-click="clearText('userName')" />
       <field
@@ -38,6 +39,7 @@
       <field
         v-model="fieldData.QQ"
         icon="comment-o"
+        type="digit"
         placeholder="请输入QQ"
         right-icon="clear"
         @right-click="clearText('QQ')" />
@@ -50,6 +52,7 @@
       <field
         v-model="fieldData.phone"
         icon="phone-o"
+        type="tel"
         placeholder="请输入手机号"
         right-icon="clear"
         @right-click="clearText('phone')" />
