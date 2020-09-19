@@ -1,25 +1,17 @@
 <template>
   <div>
-    <van-card
-      desc="描述信息描述信息描述信息描述信息描述信息描述信息描述信息描述信息"
-      title="竞赛名称"
-      thumb="https://img.yzcdn.cn/vant/ipad.jpeg"
-    >
-      <template #tags>
-        <van-tag plain type="primary">竞赛状态</van-tag>
-        <van-tag plain type="success">进行中</van-tag>
-        <van-tag plain type="danger">已结束</van-tag>
-        <van-tag plain type="warning">竞赛类型</van-tag>
-        <div style="margin-top: 10px;display: flex; justify-content:space-between">
-          <div>开始时间:2020-09-01</div>
-          <div>结束时间:2020-09-01</div>
+    <item-group :setting="setting">
+      <template #title_right>
+        <div>
+          正在进行
         </div>
       </template>
-      <template #footer>
-        <van-button size="mini">按钮</van-button>
-        <van-button size="mini">按钮</van-button>
+      <template #default>
+        <div v-for="(item,index) in list" :key="`item${index}`">
+          <table-card style="margin-top: 10px" @click-thumb="clickThumb"></table-card>
+        </div>
       </template>
-    </van-card>
+    </item-group>
     <div :style="{overflow: 'auto',height: height + 'px'}">
       <van-list
         v-model="loading"
@@ -41,10 +33,11 @@
 <script>
   import TableCard from "@/components/card/TableCard";
   import FootTabbar from "@/components/footTabbar/FootTabbar";
+  import ItemGroup from "@/components/item-group/index";
 
   export default {
     name: "Test",
-    components: {TableCard, FootTabbar},
+    components: {ItemGroup, TableCard, FootTabbar},
     data() {
       return {
         height: window.innerHeight - 200,
@@ -52,6 +45,15 @@
         loading: false,
         finished: false,
         list: [],
+        setting: {
+          title: '测试',
+          icon: 'home-o',
+          title_color: 'red',
+          title_desc:'测试描述',
+          style:{
+            scrollWidth:'500px'
+          }
+        },
         total: 40,
         tabbarList: [
           {

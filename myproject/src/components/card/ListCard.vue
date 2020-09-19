@@ -1,26 +1,28 @@
 <template>
-  <div :style="{overflow: 'auto',height: height + 'px'}">
-    <van-list
-      v-model="loading"
-      :error.sync="error"
-      error-text="请求失败，点击重新加载"
-      :finished="finished"
-      finished-text="没有更多数据了"
-      @load="onLoad"
-    >
-      <div v-for="(item,index) in listData" :key="`item${index}`">
-        <table-card
-          ref = 'tableCard'
-          :title="item.name"
-          :desc="item.description"
-          :start-time="item.startTime"
-          :end-time="item.endTime"
-          :status="item.status"
-          :comp-type="item.compType"
-          @click-thumb="onClickThumb"
-          style="margin-top: 10px"></table-card>
-      </div>
-    </van-list>
+  <div>
+    <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
+      <van-list
+        v-model="loading"
+        :error.sync="error"
+        error-text="请求失败，点击重新加载"
+        :finished="finished"
+        finished-text="没有更多数据了"
+        @load="onLoad"
+      >
+        <div v-for="(item,index) in listData" :key="`item${index}`">
+          <table-card
+            ref='tableCard'
+            :title="item.name"
+            :desc="item.description"
+            :start-time="item.startTime"
+            :end-time="item.endTime"
+            :status="item.status"
+            :comp-type="item.compType"
+            @click-thumb="onClickThumb"
+            style="margin-top: 10px"></table-card>
+        </div>
+      </van-list>
+    </van-pull-refresh>
   </div>
 </template>
 
@@ -42,26 +44,23 @@
         type: Number,
         default: 0,
       },
-    },
-    computed:{
-      height(){
-        return window.innerHeight - 200
+      height: {
+        type: Number,
+        default: window.innerHeight - 220
       },
     },
+    computed: {},
     data() {
       return {
         loading: false,
         finished: false,
         error: false,
+        refreshing: false,
       }
     },
     methods: {
       onLoad() {
-        this.$emit('load')
-        this.loading = false;
-        if (this.listData.length >= this.total) {
-          this.finished = true;
-        }
+        this.$emit('load');
       },
       onClickThumb() {
         console.log(this.$refs.tableCard)
@@ -69,7 +68,25 @@
         //
         // })
       },
+      onRefresh() {
+        // 清空列表数据
+        this.finished = false;
+        this.$emit('refresh');
+        // 重新加载数据
+        // 将 loading 设置为 true，表示处于加载状态
+        this.loading = true;
+        this.onLoad();
+      },
     },
+    watch: {
+      listData(value) {
+        if (value.length >= this.total) {
+          this.finished = true;
+        }
+        this.refreshing = false;
+        this.loading = false;
+      }
+    }
   }
 </script>
 

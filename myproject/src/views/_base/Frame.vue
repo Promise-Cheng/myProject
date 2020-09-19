@@ -45,6 +45,8 @@
   }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+  .main{
+    background-color: $gray-shallow-more;
+  }
 </style>

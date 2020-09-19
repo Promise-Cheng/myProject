@@ -6,9 +6,21 @@ import router from './router/index'
 import lodash from 'lodash'
 import store from './store'
 
-import {List, Tag, Icon, Cell, CellGroup, Button, Toast, NavBar, Card,Tabbar, TabbarItem} from "vant";
+import {
+  List, Tag, Icon, Cell, CellGroup, Button, Toast, NavBar, Card,
+  Tabbar, TabbarItem, PullRefresh, Grid, GridItem, Swipe, SwipeItem,
+  Step, Steps,Panel,Lazyload } from "vant";
 import 'vant/lib/index.css'
 
+Vue.use(Lazyload)
+Vue.use(Panel)
+Vue.use(Step)
+Vue.use(Steps)
+Vue.use(Swipe)
+Vue.use(SwipeItem)
+Vue.use(Grid)
+Vue.use(GridItem)
+Vue.use(PullRefresh)
 Vue.use(Tabbar)
 Vue.use(TabbarItem)
 Vue.use(List)

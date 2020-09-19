@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div  :style="{overflow: 'auto',height: height + 'px'}">
     <keep-alive>
       <router-view></router-view>
     </keep-alive>
@@ -11,6 +11,7 @@
     name: "Main",
     data(){
       return {
+        height: window.innerHeight - 100,
         isRouterAlive: true,
         keepAliveList: [],
       }
