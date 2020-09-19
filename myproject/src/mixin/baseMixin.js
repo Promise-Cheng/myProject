@@ -6,6 +6,9 @@ export default {
     sysParams() {
       return this.$store.state.systems;
     },
+    title() {
+      return this.$route.meta.title;
+    }
   },
   methods: {
     // 从value中取值，如果value非法，则返回默认值

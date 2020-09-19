@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header :title="sysParams.name" left-text="" :leftArrow="false"></Header>
+    <Header :title="title" left-text="" :leftArrow="false"></Header>
     <Main></Main>
     <FootTabbar :tabbar-list="tabbarList"></FootTabbar>
   </div>

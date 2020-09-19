@@ -5,7 +5,7 @@ export default [
     path: 'home',
     name: 'Home',
     component: Home,
-    meta: {title: '首页'}
+    meta: {title: '竞赛管理系统'}
   },
 ]
 
