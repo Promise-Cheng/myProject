@@ -28,9 +28,9 @@
       }, 1000)
     },
     methods:{
-      // clickLeft(){
-      //   clearInterval(this.timeOut);
-      // },
+      clickLeft(){
+        clearInterval(this.timeOut);
+      },
     },
     beforeDestroy() {
       clearInterval(this.timeOut);

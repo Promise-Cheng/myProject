@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :style="{overflow: 'auto',height: height + 'px'}">
     <van-list
       v-model="loading"
       :error.sync="error"
@@ -10,6 +10,7 @@
     >
       <div v-for="(item,index) in listData" :key="`item${index}`">
         <table-card
+          ref = 'tableCard'
           :title="item.name"
           :desc="item.description"
           :start-time="item.startTime"
@@ -42,6 +43,11 @@
         default: 0,
       },
     },
+    computed:{
+      height(){
+        return window.innerHeight - 200
+      },
+    },
     data() {
       return {
         loading: false,
@@ -58,9 +64,10 @@
         }
       },
       onClickThumb() {
-        api.competition.detail({CompId: this.listData.CompId}).then(res => {
-
-        })
+        console.log(this.$refs.tableCard)
+        // api.competition.detail({CompId: this.listData.CompId}).then(res => {
+        //
+        // })
       },
     },
   }

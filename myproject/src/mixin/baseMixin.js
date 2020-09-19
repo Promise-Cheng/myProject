@@ -2,6 +2,11 @@ import _ from 'lodash';
 import {Toast} from "vant";
 
 export default {
+  computed:{
+    sysParams() {
+      return this.$store.state.systems;
+    },
+  },
   methods: {
     // 从value中取值，如果value非法，则返回默认值
     valueOrDefault(value, defaultValue) {
