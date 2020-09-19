@@ -4,7 +4,7 @@
       :desc="desc"
       :title="title"
       :thumb="thumb"
-      @click-thumb="onClickThumb"
+      @click-thumb="onClickThumb()"
     >
       <template #tags>
         <van-tag plain :type="tagType">{{ statusName }}</van-tag>
@@ -84,7 +84,9 @@
             return '竞赛状态';
         }
       },
-      onClickThumb(){
+    },
+    methods: {
+      onClickThumb() {
         this.$emit('click-thumb');
       },
     }

@@ -29,7 +29,7 @@
       },
       rightText: {
         type: String,
-        default: "按钮",
+        default: "",
       },
       leftArrow: {
         type: Boolean,
@@ -46,6 +46,7 @@
     methods: {
       onClickLeft() {
         this.$emit('click-left')
+        this.$router.back(-1);
       },
       onClickRight() {
         this.$emit('click-right')

@@ -30,19 +30,21 @@
         @load="onLoad"
       >
         <div v-for="(item,index) in list" :key="`item${index}`">
-          <table-card style="margin-top: 10px"></table-card>
+          <table-card style="margin-top: 10px" @click-thumb="clickThumb"></table-card>
         </div>
       </van-list>
     </div>
+    <foot-tabbar :tabbar-list="tabbarList"></foot-tabbar>
   </div>
 </template>
 
 <script>
   import TableCard from "@/components/card/TableCard";
+  import FootTabbar from "@/components/footTabbar/FootTabbar";
 
   export default {
     name: "Test",
-    components: {TableCard},
+    components: {TableCard, FootTabbar},
     data() {
       return {
         height: window.innerHeight - 200,
@@ -51,9 +53,34 @@
         finished: false,
         list: [],
         total: 40,
+        tabbarList: [
+          {
+            title: '主页',
+            icon: 'home-o',
+            path: '/home',
+          },
+          {
+            title: '竞赛',
+            icon: 'gem-o',
+            path: '/competititon',
+          },
+          {
+            title: '团队',
+            icon: 'friends-o',
+            path: '/team',
+          },
+          {
+            title: '我的',
+            icon: 'user-o',
+            path: '/myself',
+          },
+        ]
       }
     },
     methods: {
+      clickThumb() {
+        console.log(11111)
+      },
       onLoad() {
         setTimeout(() => {
           for (let i = 0; i < 10; i++) {

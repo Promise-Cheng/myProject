@@ -1,6 +1,6 @@
 <template>
   <div class="background">
-    <Header title="敬请期待"></Header>
+    <Header title="敬请期待" @click-left="clickLeft"></Header>
     <div style="margin-top: 100px;text-align: center;">功能开发中,{{ second }}秒后自动返回主页</div>
   </div>
 </template>
@@ -14,18 +14,27 @@
     data() {
       return {
         second: 3,
+        timeOut: null,
       }
     },
     mounted() {
-      let TimeOut = setInterval(() => {
+      this.timeOut = setInterval(() => {
         if (this.second !== 0) {
           this.$set(this, 'second', this.second - 1);
         } else {
-          clearInterval(TimeOut);
-          this.$router.replace('/')
+          clearInterval(this.timeOut);
+          this.$router.back(-1);
         }
       }, 1000)
-    }
+    },
+    methods:{
+      // clickLeft(){
+      //   clearInterval(this.timeOut);
+      // },
+    },
+    beforeDestroy() {
+      clearInterval(this.timeOut);
+    },
   }
 </script>
 
