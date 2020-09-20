@@ -2,6 +2,7 @@
   <div>
     <van-pull-refresh v-model="refreshing" @refresh="onRefresh" :style="{overflow: 'auto',height: height + 'px'}">
       <van-list
+        v-if="!refreshing"
         v-model="loading"
         :error.sync="error"
         error-text="请求失败，点击重新加载"
@@ -17,7 +18,11 @@
         <div v-for="(item,index) in listData" :key="`item${index}`">
           <table-card
             ref='tableCard'
+            :is-pass="item.IsPass"
+            :passtatus="item.Passtatus"
+            :compStateID="item.compStateID"
             :title="item.name"
+            :tag="item.status"
             :desc="item.description"
             :start-time="item.startTime"
             :end-time="item.endTime"
@@ -49,6 +54,14 @@
       //   type: Number,
       //   default: 0,
       // },
+      api:{
+        type: String,
+        default: 'listByStatus',
+      },
+      status: {
+        type: Number,
+        default: 0,
+      },
       height: {
         type: Number,
         default: window.innerHeight - 100
@@ -97,15 +110,18 @@
           midData.push({
             id: item.CompId,
             status: item.CompStateName,
-            compType: item.CompTypeName,
+            compType: item.TypeName,
             name: item.compName,
+            compStateID: item.compStateID,
+            Passtatus:item.Passtatus,
+            IsPass:item.IsPass
           })
         })
         return midData
       },
       getList(params) {
         setTimeout(() => {
-          api.competition.listByStatus({status: 0, ...params}).then((res) => {
+          api.competition[this.api]({status: this.status, ...params}).then((res) => {
             if (this.refreshing) {
               this.listData = this.changeData(res.data);
             } else

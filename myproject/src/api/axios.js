@@ -8,7 +8,8 @@ import {Toast} from 'vant';
 // 环境的切换  设置axios的默认请求地址
 // 通过node的环境变量来匹配我们的默认的接口url前缀
 axios.defaults.baseURL = 'http://localhost:8085';
-
+axios.defaults.withCredentials=true;
+axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
 // if (process.env.NODE_ENV === 'development') {
 //   axios.defaults.baseURL = 'https://localhost:8085';
 // } else if (process.env.NODE_ENV === 'debug') {
@@ -20,7 +21,7 @@ axios.defaults.baseURL = 'http://localhost:8085';
 axios.defaults.timeout = 10000;
 
 //post请求的时候，我们需要加上一个请求头，所以可以在这里进行一个默认的设置，即设置post的请求头为application/x-www-form-urlencoded;charset=UTF-8
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
 
 
 // 先导入vuex,因为我们要使用到里面的状态对象

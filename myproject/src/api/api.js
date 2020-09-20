@@ -9,6 +9,8 @@ export const common = {
 }
 export const competition = {
   listByStatus: (params) => get('/Competitions/show', params),
+  getMyComp: (params) => get('/users/myComp', params),
+
   //修改
   edit: (params) => post('/teacher/manageComp/updateInfo', params),
   //新增

@@ -21,6 +21,11 @@ const router =new Router({
       component: Login
     },
     {
+      path: '/login',
+      name: 'Login',
+      component: Login
+    },
+    {
       path: '/register',
       name: 'Register',
       component: Register
@@ -48,18 +53,18 @@ const router =new Router({
   ]
 })
 
-// router.beforeEach((to, from, next) => {
-  // const role = sessionStorage.getItem('ms_username');
-  // if(!role && to.path !== '/login' && to.path !== '/login_tea' && to.path!=='/register'  && to.path!=='/register_tea' ){
-  //   let index = to.path.lastIndexOf('teacher')
-  //   if(index === -1)
-  //     next('/login');
-  //   else{
-  //     next('/login_tea');
-  //   }
-  // }else{
-  //   next();
-  // }
-// })
+router.beforeEach((to, from, next) => {
+  const role = sessionStorage.getItem('ms_username');
+  if(!role && to.path !== '/login' && to.path !== '/login_tea' && to.path!=='/register'  && to.path!=='/register_tea' ){
+    let index = to.path.lastIndexOf('teacher')
+    if(index === -1)
+      next('/login');
+    else{
+      next('/login_tea');
+    }
+  }else{
+    next();
+  }
+})
 
 export default router;
