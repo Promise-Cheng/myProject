@@ -27,7 +27,7 @@
           {
             title: '竞赛',
             icon: 'gem-o',
-            path: '/frontend/competititon',
+            path: '/frontend/competition',
           },
           {
             title: '团队',

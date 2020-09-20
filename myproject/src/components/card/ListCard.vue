@@ -7,6 +7,7 @@
         error-text="请求失败，点击重新加载"
         :finished="finished"
         finished-text="没有更多数据了"
+        :offset="1"
         @load="onLoad"
       >
         <div v-for="(item,index) in listData" :key="`item${index}`">
@@ -60,6 +61,7 @@
     },
     methods: {
       onLoad() {
+        console.log('change1111')
         this.$emit('load');
       },
       onClickThumb() {

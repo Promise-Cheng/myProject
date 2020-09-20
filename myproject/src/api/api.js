@@ -8,6 +8,7 @@ export const common = {
   register: (params) => post("/register", params),
 }
 export const competition = {
+  listByStatus: (params) => get('/Competitions/show', params),
   //修改
   edit: (params) => post('/teacher/manageComp/updateInfo', params),
   //新增

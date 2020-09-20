@@ -7,7 +7,7 @@
       @click-thumb="onClickThumb()"
     >
       <template #tags>
-        <van-tag plain :type="tagType">{{ statusName }}</van-tag>
+        <van-tag plain :type="tagType">{{ status }}</van-tag>
         <van-tag plain type="warning">{{ compType }}</van-tag>
         <div style="margin-top: 10px;display: flex; justify-content:space-between">
           <div>开始时间:{{ startTime }}</div>
