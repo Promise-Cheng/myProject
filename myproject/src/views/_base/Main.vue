@@ -1,5 +1,5 @@
 <template>
-  <div  :style="{overflow: 'auto',height: height + 'px'}">
+  <div :style="{overflow: 'auto',height: height + 'px'}">
     <keep-alive>
       <router-view></router-view>
     </keep-alive>

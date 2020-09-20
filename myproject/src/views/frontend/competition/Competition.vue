@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div>
-      共{{ list.length }}条数据
-    </div>
-    <list-card :list-data="list" :height="height" :total="total" @load="Load" @refresh="Refresh"></list-card>
+    <list-card :status="3"></list-card>
   </div>
 </template>
 
@@ -18,7 +15,7 @@
     data() {
       return {
         list: [],
-        height: window.innerHeight - 100,
+        // height: window.innerHeight - 100,
         total: 0,
         params: {
           page: 1,
@@ -28,21 +25,18 @@
       }
     },
     methods: {
-      Load() {
-        setTimeout(() => {
-          if (this.list.length !== 0 && this.params.page !== 1)
-            this.getList(this.params)
-        }, 1000)
-      },
-      Refresh() {
-        setTimeout(() => {
-          this.list = [];
-          this.params = {
-            size: 5,
-            page: 1,
-          }
-        }, 1000)
-      },
+      // Load() {
+      //   if (this.params.page !== 1)
+      //     this.getList(this.params)
+      // },
+      // Refresh() {
+      //   this.list = [];
+      //   this.params = {
+      //     size: 5,
+      //     page: 1,
+      //   }
+      //   this.getList(this.params)
+      // },
       changeData(data) {
         let midData = [];
         _.forEach(data, item => {
@@ -65,7 +59,6 @@
     },
 
     mounted() {
-      this.getList(this.params);
     }
   }
 </script>
