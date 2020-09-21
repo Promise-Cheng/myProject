@@ -8,9 +8,15 @@ import store from './store'
 import {
   List, Tag, Icon, Cell, CellGroup, Button, Toast, NavBar, Card,
   Tabbar, TabbarItem, PullRefresh, Grid, GridItem, Swipe, SwipeItem,
-  Step, Steps,Panel,Lazyload } from "vant";
+  Step, Steps, Panel, Lazyload, Field, GoodsAction, GoodsActionButton, GoodsActionIcon
+} from "vant";
 import 'vant/lib/index.css'
 
+
+Vue.use(GoodsAction)
+Vue.use(GoodsActionButton)
+Vue.use(GoodsActionIcon)
+Vue.use(Field)
 Vue.use(Lazyload)
 Vue.use(Panel)
 Vue.use(Step)

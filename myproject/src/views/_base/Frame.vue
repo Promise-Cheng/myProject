@@ -1,8 +1,13 @@
 <template>
   <div>
-    <Header :title="title" left-text="" :leftArrow="false"></Header>
+    <Header
+      :title="title"
+      :left-text="isNotHome?'返回':''"
+      :leftArrow="getValueSafelyOrDefault(this,'isNotHome',false)"></Header>
     <Main></Main>
-    <FootTabbar :tabbar-list="tabbarList"></FootTabbar>
+    <FootTabbar
+      v-if="!isNotHome"
+      :tabbar-list="tabbarList"></FootTabbar>
   </div>
 </template>
 
@@ -46,7 +51,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .main{
+  .main {
     background-color: $gray-shallow-more;
   }
 </style>

@@ -7,8 +7,9 @@
       </div>
     </template>
     <template #default>
-      <div v-for="(item,index) in showList" :key="`item${index}`" style="margin-left: 10px">
+      <div v-for="(item,index) in showList" :key="`item${index}`" style="margin-left: 10px;margin-bottom: 10px">
         <table-card
+          :id="item.id"
           :show-time="true"
           :is-pass="item.IsPass"
           :passtatus="item.Passtatus"
@@ -58,9 +59,6 @@
         showList: []
       }
     },
-    mounted() {
-      this.showList = this.changeData(this.list);
-    },
     methods: {
       changeData(data) {
         let midData = [];
@@ -70,15 +68,20 @@
             status: item.CompStateName,
             compType: item.CompTypeName,
             name: item.compName,
-            compStateID: item.compStateID,
-            description: this.getValueSafelyOrDefault(item,'compIntro',''),
-            endTime: moment(this.getValueSafelyOrDefault(item,'obEndTime','')).format('YYYY-MM-DD HH:mm:ss'),
-            startTime: moment(this.getValueSafelyOrDefault(item,'obStartTIme','')).format('YYYY-MM-DD HH:mm:ss'),
+            compStateID: item.compStateId,
+            description: this.getValueSafelyOrDefault(item, 'compIntro', ''),
+            endTime: moment(this.getValueSafelyOrDefault(item, 'obEndTime', '')).format('YYYY-MM-DD HH:mm:ss'),
+            startTime: moment(this.getValueSafelyOrDefault(item, 'obStartTIme', '')).format('YYYY-MM-DD HH:mm:ss'),
           })
         })
         return midData
       },
     },
+    watch: {
+      list(value) {
+        this.showList = this.changeData(value);
+      }
+    }
   }
 </script>
 

@@ -4,7 +4,7 @@
       :desc="'描述：'+desc"
       :title="'名称：'+title"
       :thumb="thumb"
-      @click-thumb="onClickThumb()"
+      @click="onClickThumb()"
     >
       <template #tag>
         <van-tag mark :type="tagType">{{ status }}</van-tag>
@@ -33,6 +33,10 @@
   export default {
     name: "TableCard",
     props: {
+      id: {
+        type: Number,
+        default: '',
+      },
       showTime: {      //竞赛名称
         type: Boolean,
         default: false,
@@ -125,6 +129,14 @@
     methods: {
       onClickThumb() {
         this.$emit('click-thumb');
+        this.$router.push({
+          path: 'comp-detail',
+          query: {
+            id: this.id,
+            compStateId: this.compStateID,
+            passtatus: this.passtatus,
+          }
+        })
       },
     }
   }

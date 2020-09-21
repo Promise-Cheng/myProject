@@ -2,13 +2,18 @@ import _ from 'lodash';
 import {Toast} from "vant";
 
 export default {
+
   computed:{
     sysParams() {
       return this.$store.state.systems;
     },
     title() {
       return this.$route.meta.title;
-    }
+    },
+    isNotHome() {
+      return this.$route.meta.isNotHome;
+    },
+
   },
   methods: {
     // 从value中取值，如果value非法，则返回默认值

@@ -1,33 +1,7 @@
 <template>
-  <div>
-    <item-group :setting="setting">
-      <template #title_right>
-        <div>
-          正在进行
-        </div>
-      </template>
-      <template #default>
-        <div v-for="(item,index) in list" :key="`item${index}`">
-          <table-card style="margin-top: 10px" @click-thumb="clickThumb"></table-card>
-        </div>
-      </template>
-    </item-group>
-    <div :style="{overflow: 'auto',height: height + 'px'}">
-      <van-list
-        v-model="loading"
-        :error.sync="error"
-        error-text="请求失败，点击重新加载"
-        :finished="finished"
-        :finished-text="'没有更多数据了'"
-        @load="onLoad"
-      >
-        <div v-for="(item,index) in list" :key="`item${index}`">
-          <table-card style="margin-top: 10px" @click-thumb="clickThumb"></table-card>
-        </div>
-      </van-list>
+    <div class="main" style="height: 200px">
+      <van-field style="margin-top: 10px;" v-model="text" label="文本" />
     </div>
-    <foot-tabbar :tabbar-list="tabbarList"></foot-tabbar>
-  </div>
 </template>
 
 <script>
@@ -40,6 +14,7 @@
     components: {ItemGroup, TableCard, FootTabbar},
     data() {
       return {
+        text: '测试',
         height: window.innerHeight - 200,
         error: false,
         loading: false,
@@ -49,9 +24,9 @@
           title: '测试',
           icon: 'home-o',
           title_color: 'red',
-          title_desc:'测试描述',
-          style:{
-            scrollWidth:'500px'
+          title_desc: '测试描述',
+          style: {
+            scrollWidth: '500px'
           }
         },
         total: 40,
@@ -98,6 +73,8 @@
   }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+  .main{
+    background-color: $gray-shallow;
+  }
 </style>

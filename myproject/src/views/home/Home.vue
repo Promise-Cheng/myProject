@@ -1,70 +1,73 @@
 <template>
   <div>
-    <div class="Mine-categories-swipe">
-      <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-        <van-swipe-item>
-          <img src="../../assets/images/acm.jpg" alt="">
-        </van-swipe-item>
-        <van-swipe-item>
-          <img src="../../assets/images/BPO.jpg" alt="">
-        </van-swipe-item>
-        <van-swipe-item>
-          <img src="../../assets/images/dzsj.jpg" alt="">
-        </van-swipe-item>
-        <van-swipe-item>
-          <img src="../../assets/images/immc.jpg" alt="">
-        </van-swipe-item>
-      </van-swipe>
-    </div>
-    <div style="margin-top:10px;">
-      <van-grid :border="true" :column-num="3" :gutter="10">
-        <van-grid-item
-          icon="friends-o"
-          :text="'团队总数:' + getValueSafelyOrDefault(allNum,'teamNum',0)" />
-        <van-grid-item
-          icon="gem-o"
-          :text="'竞赛总数:'+ getValueSafelyOrDefault(allNum,'CompNum',0)" />
-        <van-grid-item
-          icon="user-o"
-          :text="'使用人数:'+ getValueSafelyOrDefault(allNum,'personNum',0)" />
-      </van-grid>
-    </div>
-    <div style="margin-top:10px;">
-      <item-group :setting="workFlowSetting">
-        <template #title_right>
-          <div @click="moreWorkFlow">
-            更多流程
-          </div>
-        </template>
-        <template #default>
-          <div v-if="steps.length!==0" style="width: 100%">
-            <work-flow :steps="steps"></work-flow>
-          </div>
-          <div v-else class="nodata">暂无数据</div>
-        </template>
-      </item-group>
-    </div>
-    <div style="margin-top:10px;">
-      <home-comp-card :list="this.latestList" :setting="latestSetting" title-right="更多竞赛"></home-comp-card>
-    </div>
-    <div style="margin-top:10px;">
-      <item-group :setting="teamSetting">
-        <template #title_right>
-          <div class="title_right">
-            <div>更多团队</div>
-            <van-icon name="arrow" />
-          </div>
-        </template>
-        <template #default>
-          <template v-if="list.length !== 0">
-            <div v-for="(item,index) in list" :key="`item${index}`">
-              <table-card style="margin-left: 10px;margin-bottom: 10px;" @click-thumb="clickThumb"></table-card>
+    <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
+      <div class="Mine-categories-swipe">
+        <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
+          <van-swipe-item>
+            <img src="../../assets/images/acm.jpg" alt="">
+          </van-swipe-item>
+          <van-swipe-item>
+            <img src="../../assets/images/BPO.jpg" alt="">
+          </van-swipe-item>
+          <van-swipe-item>
+            <img src="../../assets/images/dzsj.jpg" alt="">
+          </van-swipe-item>
+          <van-swipe-item>
+            <img src="../../assets/images/immc.jpg" alt="">
+          </van-swipe-item>
+        </van-swipe>
+      </div>
+      <div style="margin-top:10px;">
+        <van-grid :border="true" :column-num="3" :gutter="10">
+          <van-grid-item
+            icon="friends-o"
+            :text="'团队总数:' + getValueSafelyOrDefault(allNum,'teamNum',0)" />
+          <van-grid-item
+            icon="gem-o"
+            :text="'竞赛总数:'+ getValueSafelyOrDefault(allNum,'CompNum',0)" />
+          <van-grid-item
+            icon="user-o"
+            :text="'使用人数:'+ getValueSafelyOrDefault(allNum,'personNum',0)" />
+        </van-grid>
+      </div>
+      <div style="margin-top:10px;">
+        <item-group :setting="workFlowSetting">
+          <template #title_right>
+            <div @click="moreWorkFlow" class="title_right">
+              更多流程
+              <van-icon name="arrow" />
             </div>
           </template>
-          <div v-else class="nodata">暂无数据</div>
-        </template>
-      </item-group>
-    </div>
+          <template #default>
+            <div v-if="steps.length!==0" style="width: 100%">
+              <work-flow :steps="steps"></work-flow>
+            </div>
+            <div v-else class="nodata">暂无数据</div>
+          </template>
+        </item-group>
+      </div>
+      <div style="margin-top:10px;">
+        <home-comp-card :list="this.latestList" :setting="latestSetting" title-right="更多竞赛"></home-comp-card>
+      </div>
+      <div style="margin-top:10px;margin-bottom: 10px">
+        <item-group :setting="teamSetting">
+          <template #title_right>
+            <div class="title_right">
+              <div>更多团队</div>
+              <van-icon name="arrow" />
+            </div>
+          </template>
+          <template #default>
+            <template v-if="list.length !== 0">
+              <div v-for="(item,index) in list" :key="`item${index}`">
+                <table-card style="margin-left: 10px;margin-bottom: 10px;" @click-thumb="clickThumb"></table-card>
+              </div>
+            </template>
+            <div v-else class="nodata">暂无数据</div>
+          </template>
+        </item-group>
+      </div>
+    </van-pull-refresh>
   </div>
 </template>
 
@@ -84,6 +87,7 @@
     components: {HomeCompCard, WorkFlow, ItemGroup, TableCard, FootTabbar},
     data() {
       return {
+        refreshing:'',
         height: window.innerHeight - 150,
         total: 40,
         allNum: {},
@@ -141,6 +145,14 @@
       this.getLatestComp()
     },
     methods: {
+      onRefresh() {
+        // 清空列表数据
+        setTimeout(()=>{
+          this.refreshing = false;
+        },1000)
+        this.getList()
+        this.getLatestComp()
+      },
       moreWorkFlow() {
         Toast.fail('该功能正在开发中。');
       },

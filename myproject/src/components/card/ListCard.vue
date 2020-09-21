@@ -19,6 +19,7 @@
         <div v-for="(item,index) in listData" :key="`item${index}`">
           <table-card
             ref='tableCard'
+            :id="item.id"
             :show-time="false"
             :is-pass="item.IsPass"
             :passtatus="item.Passtatus"
@@ -96,7 +97,7 @@
         this.getList(this.params)
       },
       onClickThumb() {
-        console.log(this.$refs.tableCard)
+        // console.log(this.$refs.tableCard)
         // api.competition.detail({CompId: this.listData.CompId}).then(res => {
         //
         // })

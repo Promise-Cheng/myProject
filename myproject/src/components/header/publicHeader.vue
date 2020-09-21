@@ -46,7 +46,9 @@
     methods: {
       onClickLeft() {
         this.$emit('click-left')
-        this.$router.back(-1);
+        if(this.leftArrow){
+          this.$router.back(-1);
+        }
       },
       onClickRight() {
         this.$emit('click-right')
