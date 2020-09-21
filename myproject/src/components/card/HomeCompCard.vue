@@ -1,7 +1,7 @@
 <template>
   <item-group v-bind="$attrs">
     <template #title_right>
-      <div class="title_right ">
+      <div class="title_right " @click="goToAllComp">
         {{ titleRight }}
         <van-icon name="arrow" />
       </div>
@@ -60,6 +60,11 @@
       }
     },
     methods: {
+      goToAllComp(){
+        this.$router.push({
+          path:'/frontend/all-comp-detail',
+        })
+      },
       changeData(data) {
         let midData = [];
         _.forEach(data, item => {

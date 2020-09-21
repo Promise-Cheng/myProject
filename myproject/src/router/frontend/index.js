@@ -1,6 +1,7 @@
 import Home from "@/views/home/Home";
 import Competition from "@/views/frontend/competition/Competition";
 import CompDetail from "@/views/frontend/competition/CompDetail";
+import AllCompetition from "@/views/frontend/competition/AllCompetition";
 
 export default [
   {
@@ -21,6 +22,14 @@ export default [
     component: CompDetail,
     meta: {
       title: '竞赛详情',
+      isNotHome: true,
+    }
+  },{
+    path: 'all-comp-detail',
+    name: 'AllCompetition',
+    component: AllCompetition,
+    meta: {
+      title: '所有竞赛',
       isNotHome: true,
     }
   },

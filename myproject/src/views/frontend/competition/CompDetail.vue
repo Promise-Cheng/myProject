@@ -36,14 +36,29 @@
       <van-goods-action-icon icon="chat-o" text="联系老师" @click="onClickIcon" />
       <van-goods-action-icon icon="gem-o" to="/frontend/competition" text="已参与竞赛" />
       <van-goods-action-button
+        v-if="$route.query.compStateId === '1'|| $route.query.compStateId === '2'"
         type="danger"
         text="立即报名"
-        :disabled="
-        $route.query.compStateId !== '1'
-        && $route.query.compStateId !== '2'
-        || getValueSafelyOrDefault($route.query,'passtatus','') === '已申请'"
+        :disabled="getValueSafelyOrDefault($route.query,'passtatus','') === '已申请'
+        ||getValueSafelyOrDefault($route.query,'passtatus','') === '已通过'"
         @click="onClickButton"
       />
+      <template v-if="$route.query.compStateId === '4'|| $route.query.compStateId === '5'">
+        <van-goods-action-button
+          type="danger"
+          text="查看题目"
+          :disabled="getValueSafelyOrDefault($route.query,'passtatus','') !== '已通过'"
+          @click="onClickButton"
+        />
+      </template>
+      <template v-if="$route.query.compStateId === '5'">
+        <van-goods-action-button
+          type="danger"
+          text="查看成绩"
+          :disabled="getValueSafelyOrDefault($route.query,'passtatus','') !== '已通过'"
+          @click="onClickButton"
+        />
+      </template>
     </van-goods-action>
   </div>
 </template>
