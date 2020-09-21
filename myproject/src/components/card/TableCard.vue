@@ -1,8 +1,8 @@
 <template>
   <div>
     <van-card
-      :desc="desc"
-      :title="title"
+      :desc="'描述：'+desc"
+      :title="'名称：'+title"
       :thumb="thumb"
       @click-thumb="onClickThumb()"
     >
@@ -10,11 +10,15 @@
         <van-tag mark :type="tagType">{{ status }}</van-tag>
       </template>
       <template #tags>
-        <van-tag plain type="warning">{{ compType }}</van-tag>
-        <van-tag plain :type="tagsType">{{ Passtatus }}</van-tag>
-        <div style="margin-top: 10px;display: flex; justify-content:space-between">
-          <div>开始时间:{{ startTime }}</div>
-          <div>结束时间:{{ endTime }}</div>
+        <div style="display: flex; justify-content:flex-start;width: 120px">
+          <van-tag plain style="margin-right: 10px;" type="warning">{{ compType }}</van-tag>
+          <van-tag plain :type="tagsType" v-if="!showTime">{{ passtatus }}</van-tag>
+        </div>
+        <div v-if="showTime" style="margin-top: 10px;">
+          <div>开始时间:</div>
+          <div>{{ startTime }}</div>
+          <div>结束时间:</div>
+          <div>{{ endTime }}</div>
         </div>
       </template>
       <!--      <template #footer>-->
@@ -29,17 +33,21 @@
   export default {
     name: "TableCard",
     props: {
+      showTime: {      //竞赛名称
+        type: Boolean,
+        default: false,
+      },
       IsPass: {      //竞赛名称
         type: Number,
         default: 1,
       },
-      Passtatus: {      //竞赛名称
+      passtatus: {      //竞赛名称
         type: String,
-        default: '报名中',
+        default: '',
       },
       title: {      //竞赛名称
         type: String,
-        default: '竞赛名称',
+        default: '',
       },
       tag: {
         type: String,
@@ -47,7 +55,7 @@
       },
       desc: {
         type: String,
-        default: '描述信息',
+        default: '',
       },
       thumb: {
         type: String,
@@ -59,15 +67,15 @@
       },
       compType: {
         type: String,
-        default: '竞赛类型',
+        default: '',
       },
       startTime: {
         type: String,
-        default: 'startTime',
+        default: '',
       },
       endTime: {
         type: String,
-        default: 'endTime',
+        default: '',
       },
       compStateID: {
         type: Number,
@@ -90,14 +98,14 @@
         }
       },
       tagsType() {
-        switch (this.Passtatus) {
+        switch (this.passtatus) {
           case '已拒绝':
             return 'danger';
           case '已通过':
             return 'success'
           default:
             return 'primary';
-                    }
+        }
       },
       statusName() {
         switch (this.status) {

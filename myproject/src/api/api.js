@@ -6,11 +6,11 @@ import {get, post} from './axios'
 export const common = {
   login: (params) => post('/login', params),
   register: (params) => post("/register", params),
+  getHomeData: (params) => get('/home', params)
 }
 export const competition = {
   listByStatus: (params) => get('/Competitions/show', params),
   getMyComp: (params) => get('/users/myComp', params),
-
   //修改
   edit: (params) => post('/teacher/manageComp/updateInfo', params),
   //新增
@@ -19,5 +19,6 @@ export const competition = {
   getCompTypes: (params) => get('/teacher/CompTypes', params),
   // 参数CompId
   detail: (params) => get('/Competitions/detail', params),
+  latest: (params) => get('/Competitions/latest', params),
 }
 

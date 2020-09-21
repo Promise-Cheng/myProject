@@ -1,6 +1,7 @@
 <template>
   <div>
-    <van-pull-refresh v-model="refreshing" @refresh="onRefresh" :style="{overflow: 'auto',height: height + 'px'}">
+    <van-pull-refresh v-if="showRefresh" v-model="refreshing" @refresh="onRefresh"
+                      :style="{overflow: 'auto',height: height + 'px'}">
       <van-list
         v-if="!refreshing"
         v-model="loading"
@@ -18,6 +19,7 @@
         <div v-for="(item,index) in listData" :key="`item${index}`">
           <table-card
             ref='tableCard'
+            :show-time="false"
             :is-pass="item.IsPass"
             :passtatus="item.Passtatus"
             :compStateID="item.compStateID"
@@ -54,7 +56,11 @@
       //   type: Number,
       //   default: 0,
       // },
-      api:{
+      showRefresh: {
+        type: Boolean,
+        default: true,
+      },
+      api: {
         type: String,
         default: 'listByStatus',
       },
@@ -113,8 +119,8 @@
             compType: item.TypeName,
             name: item.compName,
             compStateID: item.compStateID,
-            Passtatus:item.Passtatus,
-            IsPass:item.IsPass
+            Passtatus: item.Passtatus,
+            IsPass: item.IsPass
           })
         })
         return midData

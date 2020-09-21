@@ -23,10 +23,10 @@
           :text="'团队总数:' + getValueSafelyOrDefault(allNum,'teamNum',0)" />
         <van-grid-item
           icon="gem-o"
-          :text="'竞赛总数:'+ getValueSafelyOrDefault(allNum,'compNum',0)" />
+          :text="'竞赛总数:'+ getValueSafelyOrDefault(allNum,'CompNum',0)" />
         <van-grid-item
           icon="user-o"
-          :text="'使用人数:'+ getValueSafelyOrDefault(allNum,'userNum',0)" />
+          :text="'使用人数:'+ getValueSafelyOrDefault(allNum,'personNum',0)" />
       </van-grid>
     </div>
     <div style="margin-top:10px;">
@@ -45,55 +45,43 @@
       </item-group>
     </div>
     <div style="margin-top:10px;">
-      <item-group :setting="latestSetting">
-<!--        <template #title_right>-->
-<!--          <div>-->
-<!--            正在进行-->
-<!--          </div>-->
-<!--        </template>-->
-        <template #default>
-          <div v-if="latestList.length !== 0">
-            <div v-for="(item,index) in latestList" :key="`item${index}`">
-              <table-card style="margin-top: 10px" @click-thumb="clickThumb"></table-card>
-            </div>
-          </div>
-          <div v-else class="nodata">暂无数据</div>
-        </template>
-      </item-group>
+      <home-comp-card :list="this.latestList" :setting="latestSetting" title-right="更多竞赛"></home-comp-card>
     </div>
     <div style="margin-top:10px;">
       <item-group :setting="teamSetting">
-<!--        <template #title_right>-->
-<!--          <div>-->
-<!--            正在进行-->
-<!--          </div>-->
-<!--        </template>-->
-        <template #default>
-          <div v-if="list.length !== 0">
-            <div v-for="(item,index) in list" :key="`item${index}`">
-              <table-card style="margin-top: 10px" @click-thumb="clickThumb"></table-card>
-            </div>
+        <template #title_right>
+          <div class="title_right">
+            <div>更多团队</div>
+            <van-icon name="arrow" />
           </div>
+        </template>
+        <template #default>
+          <template v-if="list.length !== 0">
+            <div v-for="(item,index) in list" :key="`item${index}`">
+              <table-card style="margin-left: 10px;margin-bottom: 10px;" @click-thumb="clickThumb"></table-card>
+            </div>
+          </template>
           <div v-else class="nodata">暂无数据</div>
         </template>
       </item-group>
     </div>
-    <!--    <list-card :list-data="listData" :height="height" :total="total" @load="Load" @refresh="Refresh"></list-card>-->
   </div>
 </template>
 
 <script>
   import FootTabbar from "@/components/footTabbar/FootTabbar";
-  import ListCard from "@/components/card/ListCard";
+  import TableCard from "@/components/card/TableCard";
   import baseMixin from "@/mixin/baseMixin";
   import ItemGroup from "@/components/item-group/index";
   import WorkFlow from "@/components/workFlow/workFlow";
+  import * as api from "@/api/api"
   import {Toast} from 'vant'
+  import HomeCompCard from "@/components/card/HomeCompCard";
 
   export default {
     name: "Home",
     mixins: [baseMixin],
-    components: {WorkFlow, ItemGroup, ListCard, FootTabbar},
+    components: {HomeCompCard, WorkFlow, ItemGroup, TableCard, FootTabbar},
     data() {
       return {
         height: window.innerHeight - 150,
@@ -133,7 +121,7 @@
           title_color: 'black',
           title_desc: '近期有变动的竞赛',
           style: {
-            scrollWidth: '100%;'
+            scrollWidth: '500px'
           }
         },
         latestList: [],
@@ -146,117 +134,11 @@
             scrollWidth: '100%;'
           }
         },
-        defaultListData: [
-          {
-            name: '测试竞赛',
-            description: '测试竞赛',
-            startTime: '测试竞赛',
-            endTime: '测试竞赛',
-            status: '测试竞赛',
-            compType: '测试竞赛',
-          }, {
-            name: '测试竞赛',
-            description: '测试竞赛',
-            startTime: '测试竞赛',
-            endTime: '测试竞赛',
-            status: '测试竞赛',
-            compType: '测试竞赛',
-          }, {
-            name: '测试竞赛',
-            description: '测试竞赛',
-            startTime: '测试竞赛',
-            endTime: '测试竞赛',
-            status: '测试竞赛',
-            compType: '测试竞赛',
-          }, {
-            name: '测试竞赛',
-            description: '测试竞赛',
-            startTime: '测试竞赛',
-            endTime: '测试竞赛',
-            status: '测试竞赛',
-            compType: '测试竞赛',
-          }, {
-            name: '测试竞赛',
-            description: '测试竞赛',
-            startTime: '测试竞赛',
-            endTime: '测试竞赛',
-            status: '测试竞赛',
-            compType: '测试竞赛',
-          }, {
-            name: '测试竞赛',
-            description: '测试竞赛',
-            startTime: '测试竞赛',
-            endTime: '测试竞赛',
-            status: '测试竞赛',
-            compType: '测试竞赛',
-          },],
-        listData: [
-          {
-            name: '测试竞赛',
-            description: '测试竞赛',
-            startTime: '测试竞赛',
-            endTime: '测试竞赛',
-            status: '测试竞赛',
-            compType: '测试竞赛',
-          },
-          {
-            name: '测试竞赛',
-            description: '测试竞赛',
-            startTime: '测试竞赛',
-            endTime: '测试竞赛',
-            status: '测试竞赛',
-            compType: '测试竞赛',
-          },
-          {
-            name: '测试竞赛',
-            description: '测试竞赛',
-            startTime: '测试竞赛',
-            endTime: '测试竞赛',
-            status: '测试竞赛',
-            compType: '测试竞赛',
-          },
-          {
-            name: '测试竞赛',
-            description: '测试竞赛',
-            startTime: '测试竞赛',
-            endTime: '测试竞赛',
-            status: '测试竞赛',
-            compType: '测试竞赛',
-          },
-          {
-            name: '测试竞赛',
-            description: '测试竞赛',
-            startTime: '测试竞赛',
-            endTime: '测试竞赛',
-            status: '测试竞赛',
-            compType: '测试竞赛',
-          },
-          {
-            name: '测试竞赛',
-            description: '测试竞赛',
-            startTime: '测试竞赛',
-            endTime: '测试竞赛',
-            status: '测试竞赛',
-            compType: '测试竞赛',
-          },
-          {
-            name: '测试竞赛',
-            description: '测试竞赛',
-            startTime: '测试竞赛',
-            endTime: '测试竞赛',
-            status: '测试竞赛',
-            compType: '测试竞赛',
-          },
-          {
-            name: '测试竞赛',
-            description: '测试竞赛',
-            startTime: '测试竞赛',
-            endTime: '测试竞赛',
-            status: '测试竞赛',
-            compType: '测试竞赛',
-          },
-        ],
       }
+    },
+    mounted() {
+      this.getList()
+      this.getLatestComp()
     },
     methods: {
       moreWorkFlow() {
@@ -265,16 +147,18 @@
       clickThumb() {
 
       },
-      Load() {
-        setTimeout(() => {
-          this.listData = [...this.listData, ...this.defaultListData];
-        }, 1000)
+      getList() {
+        api.common.getHomeData(null).then((res) => {
+          this.allNum = _.cloneDeep(res.data);
+        });
       },
-      Refresh() {
-        setTimeout(() => {
-          this.listData = [...this.defaultListData];
-        }, 1000)
-      }
+      getLatestComp() {
+        api.competition.latest({status: -1, size: 4}).then((res) => {
+          this.latestList = _.cloneDeep(res.data)
+        }).catch((err) => {
+          console.log(err)
+        })
+      },
     }
   }
 </script>
@@ -290,11 +174,19 @@
     text-align: center;
     background-color: #39a9ed;
   }
-  .Mine-categories-swipe img{
+
+  .Mine-categories-swipe img {
     display: inline-block;
     width: 100%;
     height: 150px;
   }
+
+  .title_right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
   .nodata {
     color: $gray;
     font-size: $font-size-small;

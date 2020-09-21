@@ -5,7 +5,6 @@ import App from './App'
 import router from './router/index'
 import lodash from 'lodash'
 import store from './store'
-
 import {
   List, Tag, Icon, Cell, CellGroup, Button, Toast, NavBar, Card,
   Tabbar, TabbarItem, PullRefresh, Grid, GridItem, Swipe, SwipeItem,
