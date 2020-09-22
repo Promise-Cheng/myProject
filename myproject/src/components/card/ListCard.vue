@@ -3,7 +3,6 @@
     <van-pull-refresh v-if="showRefresh" v-model="refreshing" @refresh="onRefresh"
                       :style="{overflow: 'auto',height: height + 'px'}">
       <van-list
-        v-if="!refreshing"
         v-model="loading"
         :error.sync="error"
         error-text="请求失败，点击重新加载"
@@ -111,6 +110,11 @@
         // this.loading = true;
         this.onLoad();
       },
+      /**
+       * 数据解析为显示数据
+       * @param data
+       * @returns {[]}
+       */
       changeData(data) {
         let midData = [];
         _.forEach(data, item => {

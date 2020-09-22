@@ -12,7 +12,12 @@
       <template #tags>
         <div style="display: flex; justify-content:flex-start;width: 120px">
           <van-tag plain style="margin-right: 10px;" type="warning">{{ compType }}</van-tag>
-          <van-tag plain :type="tagsType" v-if="!showTime">{{ passtatus }}</van-tag>
+          <van-tag
+            plain
+            :type="tagsType"
+            v-if="!showTime && !!passtatus">
+            {{ passtatus }}
+          </van-tag>
         </div>
         <div v-if="showTime" style="margin-top: 10px;">
           <div>开始时间:</div>

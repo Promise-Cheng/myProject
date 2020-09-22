@@ -1,21 +1,29 @@
 <template>
   <div>
     <list-card :status="-1" api="list"></list-card>
-    <van-goods-action>
-      <van-goods-action-icon icon="wap-home-o" to="/frontend/home" text="主页" />
-      <van-goods-action-icon icon="gem-o" to="/frontend/competition" text="已参与竞赛" />
-    </van-goods-action>
+    <foot-tabbar-not-home
+      :show-contact-teacher="true"
+      :show-my-comp="true"
+      :show-my-team="true"></foot-tabbar-not-home>
   </div>
 </template>
 
 <script>
   import ListCard from "@/components/card/ListCard";
+  import FootTabbarNotHome from "@/components/footTabbar/FootTabbarNotHome";
+
   export default {
     name: "AllCompetition",
-    components: {ListCard}
+    components: {FootTabbarNotHome, ListCard},
+    methods: {
+      onClickButton() {
+        this.$router.push({
+          path: '/frontend/team',
+        })
+      },
+    }
   }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
 </style>
