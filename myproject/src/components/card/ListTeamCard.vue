@@ -33,6 +33,7 @@
             :captain-name="item.captainName"
             :captain-num="item.captainNum"
             :passtatus="item.Passtatus"
+            :teamPosition="item.teamPosition"
             style="margin-top: 10px"
           >
           </team-card>
@@ -45,9 +46,11 @@
 <script>
   import * as api from "@/api/api"
   import TeamCard from "@/components/card/TeamCard";
+  import baseMixin from "@/mixin/baseMixin";
 
   export default {
     name: "ListTeamCard",
+    mixins: [baseMixin],
     components: {TeamCard},
     props: {
       showSearch: {
@@ -133,10 +136,11 @@
           midData.push({
             id: item.teamId,
             name: item.teamName,
-            description:item.teamIntro,
+            description: item.teamIntro,
             captainName: item.stuName,
             captainNum: item.stuNum,
             Passtatus: item.Passtatus,
+            teamPosition: item.Role,
           })
         })
         return midData
@@ -148,7 +152,10 @@
               this.listData = this.changeData(res.data);
             } else
               this.listData = [...this.listData, ...this.changeData(res.data)];
-            this.total = res.Sum;
+            if (this.isIllegal(res.Sum)) {
+              this.total = this.listData.length;
+            } else
+              this.total = res.Sum;
             this.params.page++;
             if (this.listData.length >= this.total) {
               this.finished = true;

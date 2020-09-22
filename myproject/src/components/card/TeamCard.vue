@@ -19,7 +19,7 @@
             {{ passtatus }}
           </van-tag>
         </div>
-        <div v-if="showPosition">队内职务:{{ teamPosition }}</div>
+        <div v-if="!!teamPosition">队内职务:{{ teamPosition }}</div>
         <div style="display: flex; justify-content:flex-end;flex-wrap:wrap;margin-top: 20px">
           <div>队长名称:{{ captainName }}</div>
           <div>队长学号:{{ captainNum }}</div>

@@ -62,7 +62,7 @@
     methods: {
       goToAllComp(){
         this.$router.push({
-          path:'/frontend/all-comp-detail',
+          path:'/frontend/all-comp',
         })
       },
       changeData(data) {

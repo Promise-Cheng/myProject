@@ -2,6 +2,7 @@ import Home from "@/views/home/Home";
 import Competition from "@/views/frontend/competition/Competition";
 import CompDetail from "@/views/frontend/competition/CompDetail";
 import AllCompetition from "@/views/frontend/competition/AllCompetition";
+import MyTeam from "@/views/frontend/team/MyTeam";
 
 export default [
   {
@@ -24,13 +25,22 @@ export default [
       title: '竞赛详情',
       isNotHome: true,
     }
-  },{
-    path: 'all-comp-detail',
+  },
+  {
+    path: 'all-comp',
     name: 'AllCompetition',
     component: AllCompetition,
     meta: {
       title: '所有竞赛',
       isNotHome: true,
+    }
+  },
+  {
+    path: 'team',
+    name: 'MyTeam',
+    component: MyTeam,
+    meta: {
+      title: '我的团队',
     }
   },
 ]
