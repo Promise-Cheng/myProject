@@ -50,22 +50,25 @@
         <home-comp-card :list="this.latestList" :setting="latestSetting" title-right="更多竞赛"></home-comp-card>
       </div>
       <div style="margin-top:10px;margin-bottom: 10px">
-        <item-group :setting="teamSetting">
-          <template #title_right>
-            <div class="title_right">
-              <div>更多团队</div>
-              <van-icon name="arrow" />
-            </div>
-          </template>
-          <template #default>
-            <template v-if="list.length !== 0">
-              <div v-for="(item,index) in list" :key="`item${index}`">
-                <table-card style="margin-left: 10px;margin-bottom: 10px;" @click-thumb="clickThumb"></table-card>
-              </div>
-            </template>
-            <div v-else class="nodata">暂无数据</div>
-          </template>
-        </item-group>
+        <home-team-card :list="this.latestTeamList" :setting="teamSetting" title-right="更多团队">
+
+        </home-team-card>
+        <!--        <item-group :setting="teamSetting">-->
+        <!--          <template #title_right>-->
+        <!--            <div class="title_right">-->
+        <!--              <div>更多团队</div>-->
+        <!--              <van-icon name="arrow" />-->
+        <!--            </div>-->
+        <!--          </template>-->
+        <!--          <template #default>-->
+        <!--            <template v-if="list.length !== 0">-->
+        <!--              <div v-for="(item,index) in list" :key="`item${index}`">-->
+        <!--                <table-card style="margin-left: 10px;margin-bottom: 10px;" @click-thumb="clickThumb"></table-card>-->
+        <!--              </div>-->
+        <!--            </template>-->
+        <!--            <div v-else class="nodata">暂无数据</div>-->
+        <!--          </template>-->
+        <!--        </item-group>-->
       </div>
     </van-pull-refresh>
   </div>
@@ -80,14 +83,15 @@
   import * as api from "@/api/api"
   import {Toast} from 'vant'
   import HomeCompCard from "@/components/card/HomeCompCard";
+  import HomeTeamCard from "@/components/card/HomeTeamCard";
 
   export default {
     name: "Home",
     mixins: [baseMixin],
-    components: {HomeCompCard, WorkFlow, ItemGroup, TableCard, FootTabbar},
+    components: {HomeTeamCard, HomeCompCard, WorkFlow, ItemGroup, TableCard, FootTabbar},
     data() {
       return {
-        refreshing:'',
+        refreshing: '',
         height: window.innerHeight - 150,
         total: 40,
         allNum: {},
@@ -133,25 +137,28 @@
           title: '卓越团队',
           icon: 'friends-o',
           title_color: 'black',
-          title_desc: '近期表现良好的团队',
+          title_desc: '近期新建的团队',
           style: {
             scrollWidth: '100%;'
           }
         },
+        latestTeamList: [],
       }
     },
     mounted() {
       this.getList()
       this.getLatestComp()
+      this.getLatestTeam()
     },
     methods: {
       onRefresh() {
         // 清空列表数据
-        setTimeout(()=>{
+        setTimeout(() => {
           this.refreshing = false;
-        },1000)
+        }, 1000)
         this.getList()
         this.getLatestComp()
+        this.getLatestTeam()
       },
       moreWorkFlow() {
         Toast.fail('该功能正在开发中。');
@@ -171,6 +178,13 @@
           console.log(err)
         })
       },
+      getLatestTeam() {
+        api.team.list({page: 1, size: 4}).then((res) => {
+          this.latestTeamList = _.cloneDeep(res.data)
+        }).catch((err) => {
+          console.log(err)
+        })
+      }
     }
   }
 </script>
