@@ -92,7 +92,7 @@
     },
     methods: {
       onSearch() {
-        api.competition.findCompByName({content: this.params.keywords}).then((res) => {
+        api.team.findTeamByName({content: this.params.keywords}).then((res) => {
           this.listData = this.changeData(res.data);
           this.total = res.data.length;
           if (this.listData.length >= this.total) {

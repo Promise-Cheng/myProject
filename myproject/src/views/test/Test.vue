@@ -1,6 +1,6 @@
 <template>
     <div>
-      <list-team-card></list-team-card>
+      <list-team-card :show-search="true"></list-team-card>
     </div>
 </template>
 

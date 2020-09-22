@@ -54,8 +54,12 @@
         default: '',
       },
       captainNum: {
-        type: Number,
-        default: -1,
+        type: String,
+        default: '',
+      },
+      passtatus: {
+        type: String,
+        default: '',
       },
       title: {
         type: String,

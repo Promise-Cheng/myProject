@@ -25,5 +25,6 @@ export const competition = {
 }
 export const team = {
   list: (params) => get('/teams/show', params),
+  findTeamByName: (params) => get('/teams/Search', params),
 }
 
