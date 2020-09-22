@@ -1,6 +1,6 @@
 <template>
-    <div class="main" style="height: 200px">
-      <van-field style="margin-top: 10px;" v-model="text" label="文本" />
+    <div>
+      <list-team-card></list-team-card>
     </div>
 </template>
 
@@ -8,10 +8,12 @@
   import TableCard from "@/components/card/TableCard";
   import FootTabbar from "@/components/footTabbar/FootTabbar";
   import ItemGroup from "@/components/item-group/index";
+  import TeamCard from "@/components/card/TeamCard";
+  import ListTeamCard from "@/components/card/ListTeamCard";
 
   export default {
     name: "Test",
-    components: {ItemGroup, TableCard, FootTabbar},
+    components: {ListTeamCard, TeamCard, ItemGroup, TableCard, FootTabbar},
     data() {
       return {
         text: '测试',

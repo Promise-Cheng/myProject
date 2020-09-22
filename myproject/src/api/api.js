@@ -22,6 +22,8 @@ export const competition = {
   list: (params) => get('/Competitions/show', params),
   latest: (params) => get('/Competitions/latest', params),
   findCompByName: (params) => get('/Competitions/Search', params),
-
+}
+export const team = {
+  list: (params) => get('/teams/show', params),
 }
 
