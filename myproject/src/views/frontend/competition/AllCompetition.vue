@@ -1,6 +1,6 @@
 <template>
   <div>
-    <list-card :status="-1" api="list"></list-card>
+    <list-card :show-search="true" :status="-1" api="list"></list-card>
     <foot-tabbar-not-home
       :show-contact-teacher="true"
       :show-my-comp="true"
@@ -15,6 +15,11 @@
   export default {
     name: "AllCompetition",
     components: {FootTabbarNotHome, ListCard},
+    data(){
+      return {
+        value:'',
+      }
+    },
     methods: {
       onClickButton() {
         this.$router.push({

@@ -6,7 +6,6 @@
 
 <script>
   import TableCard from "@/components/card/TableCard";
-  import * as api from "@/api/api"
   import ListCard from "@/components/card/ListCard";
 
   export default {

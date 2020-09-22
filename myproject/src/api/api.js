@@ -21,6 +21,7 @@ export const competition = {
   detail: (params) => get('/Competitions/detail', params),
   list: (params) => get('/Competitions/show', params),
   latest: (params) => get('/Competitions/latest', params),
+  findCompByName: (params) => get('/Competitions/Search', params),
 
 }
 

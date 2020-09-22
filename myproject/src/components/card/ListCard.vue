@@ -1,7 +1,17 @@
 <template>
   <div>
+    <van-search
+      v-if="showSearch"
+      v-model="params.keywords"
+      show-action
+      placeholder="请输入搜索关键词"
+      @cancel="onCancel">
+      <template #action>
+        <div @click="onSearch" style="width: 50px; text-align: center">搜索</div>
+      </template>
+    </van-search>
     <van-pull-refresh v-if="showRefresh" v-model="refreshing" @refresh="onRefresh"
-                      :style="{overflow: 'auto',height: height + 'px'}">
+                      :style="{overflow: 'auto',height: (height-(showSearch?60:0))+'px'}">
       <van-list
         v-model="loading"
         :error.sync="error"
@@ -56,6 +66,10 @@
       //   type: Number,
       //   default: 0,
       // },
+      showSearch: {
+        type: Boolean,
+        default: false,
+      },
       showRefresh: {
         type: Boolean,
         default: true,
@@ -84,6 +98,7 @@
         params: {
           page: 1,
           size: 10,
+          keywords: '',
         },
         total: 0,
       }
@@ -92,6 +107,18 @@
       this.onLoad(this.params)
     },
     methods: {
+      onSearch() {
+        api.competition.findCompByName({content: this.params.keywords}).then((res) => {
+          this.listData = this.changeData(res.data);
+          this.total = res.data.length;
+          if (this.listData.length >= this.total) {
+            this.finished = true;
+          }
+        })
+      },
+      onCancel() {
+
+      },
       onLoad() {
         this.getList(this.params)
       },
@@ -103,6 +130,7 @@
       },
       onRefresh() {
         // 清空列表数据
+        this.params.keywords = '';
         this.finished = false;
         this.params.page = 1;
         // 重新加载数据
@@ -146,7 +174,6 @@
             this.refreshing = false;
           })
         }, 1000)
-
       },
     },
     watch: {
