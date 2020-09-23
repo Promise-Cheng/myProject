@@ -92,7 +92,7 @@
             this.isLogining = false;
             sessionStorage.setItem('ms_username', this.userName);
             sessionStorage.setItem('ms_password', this.password);
-            this.$store.state.user = {user: this.userName, info: res.info, password: this.password};
+            this.$store.dispatch('getUserInfo');
             Toast.success('登录成功');
             this.$router.push('/frontend/home');
           } else {

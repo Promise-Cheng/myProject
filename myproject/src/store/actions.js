@@ -14,4 +14,8 @@ export default {
       context.commit('init', {key: 'isLoaded', value: true});
     })
   },
+  clearSystems(context){
+    context.commit('init', {key: 'user', value: null});
+    context.commit('init', {key: 'isLoaded', value: false});
+  }
 }
