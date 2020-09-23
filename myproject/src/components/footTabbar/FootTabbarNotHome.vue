@@ -10,6 +10,11 @@
       text="联系老师"
       @click="onContactTeacher" />
     <van-goods-action-icon
+      v-if="showContactCaptain"
+      icon="chat-o"
+      text="联系队长"
+      @click="onContactCaptain" />
+    <van-goods-action-icon
       v-if="showMyComp"
       icon="gem-o"
       to="/frontend/competition"
@@ -19,6 +24,24 @@
       type="danger"
       text="我的团队"
       @click="onClickButton"
+    />
+    <van-goods-action-button
+      v-if="showJoinIn && !($route.query.passtatus==='已申请'||$route.query.passtatus==='已通过')"
+      type="danger"
+      text="申请加入"
+      @click="clickJoinTeam"
+    />
+    <van-goods-action-button
+      v-if="showJoinIn && ($route.query.passtatus==='已申请'||$route.query.passtatus==='已通过')"
+      type="danger"
+      :text="$route.query.passtatus==='已申请'?'取消申请':$route.query.passtatus==='已通过'?'退出团队':'申请加入'"
+      @click="clickJoinTeam"
+    />
+    <van-goods-action-button
+      v-if="showApproval"
+      type="danger"
+      text="审批申请者"
+      @click="clickJoinTeam"
     />
     <template v-if="!isIllegal($route.query.compStateId)">
       <van-goods-action-button
@@ -57,6 +80,18 @@
     name: "FootTabbarNotHome",
     mixins: [baseMixin],
     props: {
+      showApproval: {
+        type: Boolean,
+        default: false,
+      },
+      showContactCaptain: {
+        type: Boolean,
+        default: false,
+      },
+      showJoinIn: {
+        type: Boolean,
+        default: false,
+      },
       showMyComp: {
         type: Boolean,
         default: false,
@@ -75,6 +110,9 @@
       },
     },
     methods: {
+      onContactCaptain() {
+        Toast.fail('非常抱歉,暂无队长联系方式');
+      },
       onClickButton() {
         this.$router.push({
           path: '/frontend/team',
@@ -82,6 +120,9 @@
       },
       onContactTeacher() {
         Toast.fail('非常抱歉,暂无老师联系方式');
+      },
+      clickJoinTeam() {
+        Toast.fail('参加团队');
       },
     }
   }

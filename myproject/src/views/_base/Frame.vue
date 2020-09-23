@@ -16,11 +16,12 @@
   import FootTabbar from "@/components/footTabbar/FootTabbar";
   import baseMixin from "@/mixin/baseMixin";
   import Main from "@/views/_base/Main";
+  import FootTabbarNotHome from "@/components/footTabbar/FootTabbarNotHome";
 
   export default {
     name: "Frame",
     mixins: [baseMixin],
-    components: {Main, FootTabbar, Header},
+    components: {FootTabbarNotHome, Main, FootTabbar, Header},
     data() {
       return {
         tabbarList: [

@@ -1,7 +1,7 @@
 <template>
   <div>
     <van-card
-      :desc="'介绍：'+desc"
+      :desc="!!desc?('介绍：'+desc):''"
       :title="'名称：'+title"
       @click="onClickThumb()"
     >
@@ -21,8 +21,8 @@
         </div>
         <div v-if="!!teamPosition">队内职务:{{ teamPosition }}</div>
         <div style="display: flex; justify-content:flex-end;flex-wrap:wrap;margin-top: 20px">
-          <div>队长名称:{{ captainName }}</div>
-          <div>队长学号:{{ captainNum }}</div>
+          <div v-if="!!captainName">队长名称:{{ captainName }}</div>
+          <div v-if="!!captainNum">队长学号:{{ captainNum }}</div>
         </div>
       </template>
       <!--      <template #footer>-->
@@ -93,8 +93,8 @@
           path: 'team-detail',
           query: {
             id: this.id,
-            compStateId: this.compStateID,
             passtatus: this.passtatus,
+            teamPosition:this.teamPosition
           }
         })
       },

@@ -3,6 +3,7 @@ import Competition from "@/views/frontend/competition/Competition";
 import CompDetail from "@/views/frontend/competition/CompDetail";
 import AllCompetition from "@/views/frontend/competition/AllCompetition";
 import MyTeam from "@/views/frontend/team/MyTeam";
+import TeamDetail from "@/views/frontend/team/TeamDetail";
 
 export default [
   {
@@ -41,6 +42,15 @@ export default [
     component: MyTeam,
     meta: {
       title: '我的团队',
+    }
+  },
+  {
+    path: 'team-detail',
+    name: 'TeamDetail',
+    component: TeamDetail,
+    meta: {
+      title: '团队详情',
+      isNotHome: true,
     }
   },
 ]

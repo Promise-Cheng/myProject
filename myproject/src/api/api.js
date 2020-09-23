@@ -27,5 +27,6 @@ export const team = {
   list: (params) => get('/teams/show', params),
   getMyTeam: (params) => get('/users/manage', params),
   findTeamByName: (params) => get('/teams/Search', params),
+  detail: (params) => get('/users/manage/detail', params),
 }
 
