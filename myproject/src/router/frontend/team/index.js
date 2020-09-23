@@ -1,5 +1,6 @@
 import MyTeam from "@/views/frontend/team/MyTeam";
 import TeamDetail from "@/views/frontend/team/TeamDetail";
+import AllTeam from "@/views/frontend/team/AllTeam";
 
 export default [
   {
@@ -19,4 +20,13 @@ export default [
       isNotHome: true,
     }
   },
+  {
+    path: 'all-team',
+    name: 'AllTeam',
+    component: AllTeam,
+    meta: {
+      title: '团队详情',
+      isNotHome: true,
+    }
+  }
 ]

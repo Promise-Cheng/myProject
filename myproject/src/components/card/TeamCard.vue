@@ -20,7 +20,7 @@
           </van-tag>
         </div>
         <div v-if="!!teamPosition">队内职务:{{ teamPosition }}</div>
-        <div style="display: flex; justify-content:flex-end;flex-wrap:wrap;margin-top: 20px">
+        <div style="display: flex; justify-content:space-between;flex-wrap:wrap;margin-top: 20px">
           <div v-if="!!captainName">队长名称:{{ captainName }}</div>
           <div v-if="!!captainNum">队长学号:{{ captainNum }}</div>
         </div>
