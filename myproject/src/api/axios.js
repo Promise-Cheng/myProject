@@ -126,7 +126,6 @@ export const post = (url, ...params) => {
     axios //QS.stringify(params)关于这个函数会输出什么结果大家可以自行尝试一下，结果会让你惊喜，也可以自己单独传一个对象进去测试一下
       .post(url, getPostParams(params))
       .then(res => {
-        console.log(res)
         resolve(res.data)
       })
       .catch(err => {

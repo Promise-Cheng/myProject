@@ -14,7 +14,7 @@ Vue.use(Router)
 //   return originalPush.call(this, location).catch(err => err)
 // }
 
-const router =new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -39,7 +39,7 @@ const router =new Router({
       path: '/frontend/',
       name: 'Frame',
       component: Frame,
-      children:[
+      children: [
         ...frontend,
       ]
     },
@@ -55,16 +55,17 @@ const router =new Router({
 
 router.beforeEach((to, from, next) => {
   const role = sessionStorage.getItem('ms_username');
-  if(!role && to.path !== '/login' && to.path !== '/login_tea' && to.path!=='/register'  && to.path!=='/register_tea' ){
+  if (!role && to.path !== '/login' && to.path !== '/login_tea' && to.path !== '/register' && to.path !== '/register_tea') {
     let index = to.path.lastIndexOf('teacher')
-    if(index === -1)
+    if (index === -1)
       next('/login');
-    else{
+    else {
       next('/login_tea');
     }
-  }else{
+  } else {
     next();
-    return store.dispatch('getUserInfo');
+    if (!store.state.isLoaded)
+      return store.dispatch('getUserInfo');
   }
 })
 export default router;

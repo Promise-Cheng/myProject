@@ -11,6 +11,7 @@ export default {
     const password = sessionStorage.getItem('ms_password');
     api.common.login({stuNum: username, password: password}).then(res => {
       context.commit('init', {key: 'user', value: res.info});
+      context.commit('init', {key: 'isLoaded', value: true});
     })
   },
 }

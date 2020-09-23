@@ -1,7 +1,7 @@
 <template>
   <item-group v-bind="$attrs">
     <template #title_right>
-      <div class="title_right " @click="goToAllComp">
+      <div class="title_right " @click="goToAllTeam">
         {{ titleRight }}
         <van-icon name="arrow" />
       </div>
@@ -55,9 +55,9 @@
       }
     },
     methods: {
-      goToAllComp(){
+      goToAllTeam(){
         this.$router.push({
-          path:'/frontend/all-comp',
+          path:'/frontend/all-team',
         })
       },
       changeData(data) {
