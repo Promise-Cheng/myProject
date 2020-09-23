@@ -13,7 +13,9 @@ export default {
     isNotHome() {
       return this.$route.meta.isNotHome;
     },
-
+    user(){
+      return this.$store.state.user
+    }
   },
   methods: {
     // 从value中取值，如果value非法，则返回默认值

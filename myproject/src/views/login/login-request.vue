@@ -90,9 +90,9 @@
         api.common.login({stuNum: this.userName, password: this.password}).then((res) => {
           if (res.result === 'success') {
             this.isLogining = false;
-            sessionStorage.setItem('ms_username', res.info);
-            console.log(this.$store.state.user)
-            this.$store.state.user = {user: this.stuId, info: res.info, password: this.password}
+            sessionStorage.setItem('ms_username', this.userName);
+            sessionStorage.setItem('ms_password', this.password);
+            this.$store.state.user = {user: this.userName, info: res.info, password: this.password};
             Toast.success('登录成功');
             this.$router.push('/frontend/home');
           } else {
