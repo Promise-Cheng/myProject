@@ -15,6 +15,11 @@
       text="联系队长"
       @click="onContactCaptain" />
     <van-goods-action-icon
+      v-if="showMyTeamIcon"
+      icon="friends-o"
+      text="我的团队"
+      @click="onContactCaptain" />
+    <van-goods-action-icon
       v-if="showMyComp"
       icon="gem-o"
       to="/frontend/competition"
@@ -23,6 +28,12 @@
       v-if="showMyTeam"
       type="danger"
       text="我的团队"
+      @click="onClickButton"
+    />
+    <van-goods-action-button
+      v-if="showCreateTeam"
+      type="danger"
+      text="创建团队"
       @click="onClickButton"
     />
     <van-goods-action-button
@@ -80,6 +91,14 @@
     name: "FootTabbarNotHome",
     mixins: [baseMixin],
     props: {
+      showMyTeamIcon: {
+        type: Boolean,
+        default: false,
+      },
+      showCreateTeam: {
+        type: Boolean,
+        default: false,
+      },
       showApproval: {
         type: Boolean,
         default: false,
