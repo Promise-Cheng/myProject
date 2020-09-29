@@ -15,6 +15,7 @@ export const competition = {
   edit: (params) => post('/teacher/manageComp/updateInfo', params),
   //新增
   save: (params) => post('/teacher/submit', params),
+  applyComp: (params) => post('users/myteams/applyToComp', params),
   //获取所有竞赛类型
   getCompTypes: (params) => get('/teacher/CompTypes', params),
   // 参数CompId
@@ -22,11 +23,13 @@ export const competition = {
   list: (params) => get('/Competitions/show', params),
   latest: (params) => get('/Competitions/latest', params),
   findCompByName: (params) => get('/Competitions/Search', params),
+
 }
 export const team = {
   list: (params) => get('/teams/show', params),
   getMyTeam: (params) => get('/users/manage', params),
   findTeamByName: (params) => get('/teams/Search', params),
   detail: (params) => get('/users/manage/detail', params),
+  myTeams: (params) => get('/users/myteams', params),
 }
 

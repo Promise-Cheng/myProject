@@ -25,10 +25,6 @@
           <div v-if="!!captainNum">队长学号:{{ captainNum }}</div>
         </div>
       </template>
-      <!--      <template #footer>-->
-      <!--        <van-button size="mini">按钮</van-button>-->
-      <!--        <van-button size="mini">按钮</van-button>-->
-      <!--      </template>-->
     </van-card>
   </div>
 </template>

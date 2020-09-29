@@ -1,6 +1,6 @@
 <template>
   <div>
-    <list-team-card :show-search="true" :status="-1" api="list"></list-team-card>
+    <list-team-card :show-search="true" api="list"></list-team-card>
     <foot-tabbar-not-home
       :show-my-team-icon="true"
       :show-create-team="true"></foot-tabbar-not-home>

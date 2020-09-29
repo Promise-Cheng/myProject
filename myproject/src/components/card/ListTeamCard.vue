@@ -27,6 +27,7 @@
         </div>
         <div v-for="(item,index) in listData" :key="`item${index}`">
           <team-card
+            v-bind="$attrs"
             :id="item.id"
             :title="item.name"
             :desc="item.description"
@@ -37,6 +38,18 @@
             style="margin-top: 10px"
           >
           </team-card>
+          <div
+            v-if="showButton"
+            class="card_button">
+            <van-button
+              size="small"
+              style="width: 60px"
+              type="danger"
+              @click="JoinComp(item.id)">
+              报名
+            </van-button>
+
+          </div>
         </div>
       </van-list>
     </van-pull-refresh>
@@ -53,6 +66,10 @@
     mixins: [baseMixin],
     components: {TeamCard},
     props: {
+      showButton: {
+        type: Boolean,
+        default: false,
+      },
       showSearch: {
         type: Boolean,
         default: false,
@@ -94,6 +111,9 @@
       this.onLoad(this.params)
     },
     methods: {
+      JoinComp(id){
+
+      },
       onSearch() {
         api.team.findTeamByName({content: this.params.keywords}).then((res) => {
           this.listData = this.changeData(res.data);
@@ -178,5 +198,13 @@
   .totalNum {
     color: $font-color-gray;
     font-size: $font-size-normal;
+  }
+
+  .card_button {
+    display: flex;
+    justify-content: flex-end;
+    background-color: #fff;
+    width: 100%;
+    padding: 10px;
   }
 </style>
