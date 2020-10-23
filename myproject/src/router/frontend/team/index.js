@@ -26,7 +26,7 @@ export default [
     name: 'AllTeam',
     component: AllTeam,
     meta: {
-      title: '团队详情',
+      title: '所有团队',
       isNotHome: true,
     }
   },

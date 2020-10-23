@@ -2,11 +2,11 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/views/login/login'
 import Register from '@/views/register/Register'
-import Frame from "@/views/_base/Frame";
+import Frame from '@/views/_base/Frame'
 import Test from '@/views/test/Test'
 import NotFound from '@/views/notFound/notFound'
-import frontend from '@/router/frontend';
-import store from "@/store";
+import frontend from '@/router/frontend'
+import store from '@/store'
 
 Vue.use(Router)
 // const originalPush = Router.prototype.push;
