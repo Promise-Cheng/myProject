@@ -6,7 +6,7 @@ import Frame from '@/views/_base/Frame'
 import Test from '@/views/test/Test'
 import NotFound from '@/views/notFound/notFound'
 import frontend from '@/router/frontend'
-import store from '@/store'
+import { get } from '../api/axios'
 
 Vue.use(Router)
 // const originalPush = Router.prototype.push;
@@ -40,7 +40,7 @@ const router = new Router({
       name: 'Frame',
       component: Frame,
       children: [
-        ...frontend,
+        ...frontend
       ]
     },
 
@@ -49,23 +49,23 @@ const router = new Router({
       path: '*',
       component: NotFound,
       meta: {title: '找不到页面'}
-    },
+    }
   ]
 })
 
-router.beforeEach((to, from, next) => {
-  const role = sessionStorage.getItem('ms_username');
-  if (!role && to.path !== '/login' && to.path !== '/login_tea' && to.path !== '/register' && to.path !== '/register_tea') {
-    let index = to.path.lastIndexOf('teacher')
-    if (index === -1)
-      next('/login');
-    else {
-      next('/login_tea');
+router.beforeEach(async (to, from, next) => {
+  if (!to.meta.bypass) {
+    return next()
+  }
+
+  try {
+    const res = await get('/api/checkSession',{})
+    if (res.ok) {
+      return next()
     }
-  } else {
-    next();
-    if (!store.state.isLoaded)
-      return store.dispatch('getUserInfo');
+    return next({ name: 'Login', query: { next: to.fullPath } })
+  } catch (err) {
+    return next({ name: 'Login' })
   }
 })
-export default router;
+export default router

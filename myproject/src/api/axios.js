@@ -1,15 +1,18 @@
-//https://blog.csdn.net/weixin_33721344/article/details/87987965
 
 import axios from 'axios'
-import QS from 'qs'// 引入qs模块，用来序列化post类型的数据
-import {Toast} from 'vant';
 
+// post请求的时候，我们需要加上一个请求头，所以可以在这里进行一个默认的设置，即设置post的请求头为application/x-www-form-urlencoded;charset=UTF-8
+// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+
+// 先导入vuex,因为我们要使用到里面的状态对象
+// vuex的路径根据自己的路径去写
+import store from '@/store/index'
 
 // 环境的切换  设置axios的默认请求地址
 // 通过node的环境变量来匹配我们的默认的接口url前缀
-axios.defaults.baseURL = 'http://localhost:8085';
-axios.defaults.withCredentials=true;
-axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
+axios.defaults.baseURL = 'http://localhost:8085'
+axios.defaults.withCredentials = true
+axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 // if (process.env.NODE_ENV === 'development') {
 //   axios.defaults.baseURL = 'https://localhost:8085';
 // } else if (process.env.NODE_ENV === 'debug') {
@@ -17,16 +20,8 @@ axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded;char
 // } else if (process.env.NODE_ENV === 'production') {
 //   axios.defaults.baseURL = 'https://localhost:8080';
 // }
-//设置请求超时
-axios.defaults.timeout = 10000;
-
-//post请求的时候，我们需要加上一个请求头，所以可以在这里进行一个默认的设置，即设置post的请求头为application/x-www-form-urlencoded;charset=UTF-8
-// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
-
-
-// 先导入vuex,因为我们要使用到里面的状态对象
-// vuex的路径根据自己的路径去写
-import store from '@/store/index';
+// 设置请求超时
+axios.defaults.timeout = 10000
 
 // 请求拦截器
 // axios.interceptors.request.use(
@@ -123,7 +118,7 @@ import store from '@/store/index';
  */
 export const post = (url, ...params) => {
   return new Promise((resolve, reject) => {
-    axios //QS.stringify(params)关于这个函数会输出什么结果大家可以自行尝试一下，结果会让你惊喜，也可以自己单独传一个对象进去测试一下
+    axios // QS.stringify(params)关于这个函数会输出什么结果大家可以自行尝试一下，结果会让你惊喜，也可以自己单独传一个对象进去测试一下
       .post(url, getPostParams(params))
       .then(res => {
         resolve(res.data)
@@ -134,13 +129,13 @@ export const post = (url, ...params) => {
   })
 }
 
-export function getPostParams(params) {
-  let keyArr = Object.keys(params[0]);
-  let urlSearchParams = new URLSearchParams();
+export function getPostParams (params) {
+  let keyArr = Object.keys(params[0])
+  let urlSearchParams = new URLSearchParams()
   _.forEach(keyArr, item => {
-    urlSearchParams.append(item, params[0][item]);
+    urlSearchParams.append(item, params[0][item])
   })
-  return urlSearchParams;
+  return urlSearchParams
 }
 
 /**

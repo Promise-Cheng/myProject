@@ -10,6 +10,7 @@ export default [
     component: MyTeam,
     meta: {
       title: '我的团队',
+      bypass: true
     }
   },
   {
