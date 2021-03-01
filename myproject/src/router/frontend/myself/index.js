@@ -5,6 +5,6 @@ export default [
     path: 'myself',
     name: 'User',
     component: User,
-    meta: {title: '我的相关信息'}
+    meta: {title: '我的相关信息', bypass: true}
   },
 ]

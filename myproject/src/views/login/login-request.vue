@@ -89,7 +89,6 @@ export default {
       }
       api.common.login({stuNum: this.userName, password: this.password}).then((res) => {
         if (res.result === 'success') {
-          this.$store.dispatch('getUserInfo', res.info)
           Toast.success('登录成功')
           this.$router.push('/frontend/home')
         } else {

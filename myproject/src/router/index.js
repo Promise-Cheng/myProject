@@ -6,7 +6,8 @@ import Frame from '@/views/_base/Frame'
 import Test from '@/views/test/Test'
 import NotFound from '@/views/notFound/notFound'
 import frontend from '@/router/frontend'
-import { get } from '../api/axios'
+import {get} from '../api/axios'
+import store from '@/store'
 
 Vue.use(Router)
 // const originalPush = Router.prototype.push;
@@ -54,18 +55,24 @@ const router = new Router({
 })
 
 router.beforeEach(async (to, from, next) => {
+  console.log(to)
+  if (to.path === '/login' && store.state.isLoaded) {
+    store.dispatch('clearSystems')
+  }
   if (!to.meta.bypass) {
     return next()
   }
-
   try {
-    const res = await get('/api/checkSession',{})
+    const res = await get('/api/checkSession', {})
     if (res.ok) {
+      if (!store.state.isLoaded)
+        await store.dispatch('getUserInfo')
       return next()
     }
-    return next({ name: 'Login', query: { next: to.fullPath } })
+    return next({name: 'Login', query: {next: to.fullPath}})
   } catch (err) {
-    return next({ name: 'Login' })
+    console.log(err)
+    return next({name: 'Login'})
   }
 })
 export default router
