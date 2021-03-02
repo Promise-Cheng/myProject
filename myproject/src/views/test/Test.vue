@@ -1,6 +1,6 @@
 <template>
-    <div>
-      <list-team-card :show-search="true"></list-team-card>
+    <div style="height: calc(100vh - 16px)">
+      <show-rank />
     </div>
 </template>
 
@@ -10,10 +10,11 @@
   import ItemGroup from "@/components/item-group/index";
   import TeamCard from "@/components/card/TeamCard";
   import ListTeamCard from "@/components/card/ListTeamCard";
+  import ShowRank from "./ShowRank";
 
   export default {
     name: "Test",
-    components: {ListTeamCard, TeamCard, ItemGroup, TableCard, FootTabbar},
+    components: {ShowRank, ListTeamCard, TeamCard, ItemGroup, TableCard, FootTabbar},
     data() {
       return {
         text: '测试',

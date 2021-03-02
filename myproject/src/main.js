@@ -9,9 +9,11 @@ import {
   List, Tag, Icon, Cell, CellGroup, Button, Toast, NavBar, Card,
   Tabbar, TabbarItem, PullRefresh, Grid, GridItem, Swipe, SwipeItem,
   Step, Steps, Panel, Lazyload, Field, GoodsAction, GoodsActionButton,
-  GoodsActionIcon,Search} from "vant";
+  GoodsActionIcon,Search,Row,Col} from "vant";
 import 'vant/lib/index.css'
 
+Vue.use(Row)
+Vue.use(Col)
 Vue.use(Search)
 Vue.use(GoodsAction)
 Vue.use(GoodsActionButton)

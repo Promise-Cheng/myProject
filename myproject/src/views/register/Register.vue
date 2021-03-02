@@ -3,12 +3,12 @@
     <Header right-text="" @click-left="onClickLeft"></Header>
     <field-group class="register_submit">
       <field
-        v-model="fieldData.userName"
+        v-model="fieldData.stuNum"
         icon="manager-o"
         placeholder="请输入学号"
         type="digit"
         right-icon="clear"
-        @right-click="clearText('userName')" />
+        @right-click="clearText('stuNum')" />
       <field
         v-model="fieldData.password"
         icon="lock"
@@ -50,12 +50,12 @@
         right-icon="clear"
         @right-click="clearText('email')" />
       <field
-        v-model="fieldData.phone"
+        v-model="fieldData.phoneNum"
         icon="phone-o"
         type="tel"
         placeholder="请输入手机号"
         right-icon="clear"
-        @right-click="clearText('phone')" />
+        @right-click="clearText('phoneNum')" />
       <div class="register_submit_btn">
         <van-button
           type="danger"
@@ -81,24 +81,24 @@
     data() {
       return {
         fieldData: {
-          userName: '',
+          stuNum: '',
           password: '',
           repeatPassword: '',
           stuName: '',
           class_: '',
           QQ: '',
           email: '',
-          phone: '',
+          phoneNum: '',
         },
         checkData:{
-          userName: '用户名',
+          stuNum: '用户名',
           password: '密码',
           repeatPassword: '',
           stuName: '姓名',
           class_: '班级',
           QQ: 'QQ',
           email: '邮箱',
-          phone: '电话',
+          phoneNum: '电话',
         },
         isLogining: false,
         visiblePass: false,
