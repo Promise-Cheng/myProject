@@ -52,6 +52,7 @@ import md_kefu from '@/components/md-kefu/'
 import BaseMixin from '@/mixin/baseMixin'
 import * as api from '@/api/api'
 import {Popup, Toast} from 'vant'
+import { HandlePassword } from "@/helper/baseJS";
 
 export default {
   name: 'login-request',
@@ -87,7 +88,8 @@ export default {
         this.isLogining = false
         return
       }
-      api.common.login({stuNum: this.userName, password: this.password}).then((res) => {
+      let hash = HandlePassword(this.password)
+      api.common.login({stuNum: this.userName, password: hash}).then((res) => {
         if (res.result === 'success') {
           Toast.success('登录成功')
           this.$router.push('/frontend/home')
